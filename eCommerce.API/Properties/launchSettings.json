@@ -3,33 +3,44 @@
     "http": {
       "commandName": "Project",
       "launchBrowser": true,
-      "launchUrl": "swagger",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development",
         "POSTGRES_HOST": "localhost",
-        "POSTGRES_PASSWORD": "admin"
+        "POSTGRES_PORT": "5432",
+        "POSTGRES_USER": "postgres",
+        "POSTGRES_PASSWORD": "admin",
+        "POSTGRES_DATABASE": "eCommerceUsers"
       },
       "dotnetRunMessages": true,
-      "applicationUrl": "http://localhost:5031"
+      "applicationUrl": "http://localhost:5031",
+      "launchUrl": "swagger"
     },
     "https": {
       "commandName": "Project",
       "launchBrowser": true,
-      "launchUrl": "swagger",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development",
         "POSTGRES_HOST": "localhost",
-        "POSTGRES_PASSWORD": "admin"
+        "POSTGRES_PORT": "5432",
+        "POSTGRES_USER": "postgres",
+        "POSTGRES_PASSWORD": "admin",
+        "POSTGRES_DATABASE": "eCommerceUsers"
       },
       "dotnetRunMessages": true,
-      "applicationUrl": "https://localhost:7214;http://localhost:5031"
+      "applicationUrl": "https://localhost:7214;http://localhost:5031",
+      "launchUrl": "swagger"
     },
     "IIS Express": {
       "commandName": "IISExpress",
       "launchBrowser": true,
       "launchUrl": "swagger",
       "environmentVariables": {
-        "ASPNETCORE_ENVIRONMENT": "Development"
+        "ASPNETCORE_ENVIRONMENT": "Development",
+        "POSTGRES_HOST": "localhost",
+        "POSTGRES_PORT": "5432",
+        "POSTGRES_USER": "postgres",
+        "POSTGRES_PASSWORD": "admin",
+        "POSTGRES_DATABASE": "eCommerceUsers"
       }
     },
     "Container (Dockerfile)": {
@@ -38,7 +49,12 @@
       "launchUrl": "{Scheme}://{ServiceHost}:{ServicePort}/swagger",
       "environmentVariables": {
         "ASPNETCORE_HTTPS_PORTS": "9091",
-        "ASPNETCORE_HTTP_PORTS": "9090"
+        "ASPNETCORE_HTTP_PORTS": "9090",
+        "POSTGRES_HOST": "localhost",
+        "POSTGRES_PORT": "5432",
+        "POSTGRES_USER": "postgres",
+        "POSTGRES_PASSWORD": "admin",
+        "POSTGRES_DATABASE": "eCommerceUsers"
       },
       "publishAllPorts": true,
       "useSSL": true
