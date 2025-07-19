@@ -27,6 +27,17 @@ builder.Services.AddFluentValidationAutoValidation();
 builder.Services.AddSwaggerGen();
 builder.Services.AddEndpointsApiExplorer();
 
+
+//Add cors services
+builder.Services.AddCors(options =>
+{
+    options.AddDefaultPolicy(builder => {
+        builder.WithOrigins("http://localhost:4200")
+        .AllowAnyMethod()
+        .AllowAnyHeader();
+    });
+});
+
 //Build the web application
 var app = builder.Build();
 
@@ -37,6 +48,9 @@ app.UseExceptionHandlingMiddleware();
 
 //Routing
 app.UseRouting();
+
+//Enable Cors
+app.UseCors();
 
 //Auth
 app.UseAuthentication();

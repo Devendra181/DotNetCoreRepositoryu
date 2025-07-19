@@ -1,3 +1,5 @@
+version: '3.4'
+
 services:
   ordersmicroservice.api:
     image: ordersmicroserviceapi
@@ -35,18 +37,18 @@ services:
   products-microservice:
     image: products-microservice:latest
     environment:
-     - ASPNETCORE_HTTP_PORTS=8080
-     - ASPNETCORE_HTTP_ENVIRONMENT=Development
-     - MYSQL_HOST=mysql-container
-     - MYSQL_PORT=3306
-     - MYSQL_DATABASE=ecommerceproductsdatabase
-     - MYSQL_USER=root
-     - MYSQL_PASSWORD=admin
+      - ASPNETCORE_HTTP_PORTS=8080
+      - ASPNETCORE_HTTP_ENVIRONMENT=Development
+      - MYSQL_HOST=mysql-container
+      - MYSQL_PORT=3306
+      - MYSQL_DATABASE=ecommerceproductsdatabase
+      - MYSQL_USER=root
+      - MYSQL_PASSWORD=admin
     ports:
-     - "6000:8080"
+      - "6001:8080"
     networks:
-     - products-mysql-network
-     - ecommerce-network
+      - products-mysql-network
+      - ecommerce-network
     depends_on:
       - mysql-container
 
@@ -58,9 +60,9 @@ services:
       # or
       - MYSQL_ROOT_PASSWORD=admin
     ports:
-     - "3307:3306"
+      - "3307:3306"
     volumes:
-     - D:/eCommerceMicroservces/mysql-init:/docker-entrypoint-initdb.d
+      - D:/eCommerceMicroservces/mysql-init:/docker-entrypoint-initdb.d
     networks:
       - products-mysql-network
       
@@ -91,9 +93,9 @@ services:
       - POSTGRES_PASSWORD=admin
       - POSTGRES_DB=eCommerceUsers
     ports:
-     - "5433:5432"
+      - "5433:5432"
     volumes:
-        - D:/eCommerceMicroservces/postgres-init:/docker-entrypoint-initdb.d
+      - D:/eCommerceMicroservces/postgres-init:/docker-entrypoint-initdb.d
     networks:
       - users-postgres-network
     
