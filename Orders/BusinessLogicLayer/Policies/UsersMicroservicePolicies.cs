@@ -1,9 +1,6 @@
 ﻿
 using Microsoft.Extensions.Logging;
 using Polly;
-using Polly.CircuitBreaker;
-using Polly.Retry;
-using Polly.Timeout;
 using Polly.Wrap;
 
 namespace eCommerce.OrdersMicroservice.BusinessLogicLayer.Policies;
