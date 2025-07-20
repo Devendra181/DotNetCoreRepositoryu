@@ -40,7 +40,7 @@ services:
     image: products-microservice:latest
     environment:
       - ASPNETCORE_HTTP_PORTS=8080
-      - ASPNETCORE_HTTP_ENVIRONMENT=Development
+      - ASPNETCORE_ENVIRONMENT=Development
       - MYSQL_HOST=mysql-container
       - MYSQL_PORT=3306
       - MYSQL_DATABASE=ecommerceproductsdatabase
@@ -73,7 +73,7 @@ services:
     image: users-microservice:latest
     environment:
       - ASPNETCORE_HTTP_PORTS=8080
-      - ASPNETCORE_HTTP_ENVIRONMENT=Development
+      - ASPNETCORE_ENVIRONMENT=Development
       - POSTGRES_HOST=postgres-container
       - POSTGRES_PORT=5432
       - POSTGRES_DATABASE=eCommerceUsers
@@ -109,7 +109,18 @@ services:
       - D:/eCommerceMicroservces/redis-cache:/data
     networks:
       - ecommerce-network
-    
+  
+  apigateway:
+    image: apigateway
+    build:
+      context: .
+      dockerfile: Orders/ApiGatway/Dockerfile
+    ports:
+      - "4000:8080"
+    networks:
+      - ecommerce-network
+ 
+
 networks:
   orders-mongodb-network:
     driver: bridge
