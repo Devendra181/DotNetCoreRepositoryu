@@ -11,9 +11,15 @@ services:
       - MONGODB_HOST=mongodb-container
       - MONGODB_PORT=27017
       - MONGODB_DATABASE=OrdersDatabase
-      - UsersMicroserviceName=users-microservice
-      - UsersMicroservicePort=9090
-      - ProductsMicroserviceName=products-microservice
+      # Making request to APIGEE not to the users microservice directly
+      # - UsersMicroserviceName=users-microservice
+      # - UsersMicroservicePort=9090
+      - UsersMicroserviceName=apigateway
+      - UsersMicroservicePort=8080
+      # Making request to APIGEE not to the products microservice directly
+      # - ProductsMicroserviceName=products-microservice
+      # - ProductsMicroservicePort=8080
+      - ProductsMicroserviceName=apigateway
       - ProductsMicroservicePort=8080
       - REDIS_HOST=redis
       - REDIS_PORT=6379
@@ -114,7 +120,7 @@ services:
     image: apigateway
     build:
       context: .
-      dockerfile: Orders/ApiGatway/Dockerfile
+      dockerfile: Orders/ApiGateway/Dockerfile
     ports:
       - "4000:8080"
     networks:
