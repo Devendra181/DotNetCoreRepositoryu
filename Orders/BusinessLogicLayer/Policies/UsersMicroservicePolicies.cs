@@ -20,7 +20,7 @@ public class UsersMicroservicePolicies : IUsersMicroservicePolicies
     {
         var retryPolicy = _pollyPolicies.GetRetryPolicy(3);
         var circuitBreakerPolicy = _pollyPolicies.GetCircuitBreakerPolicy(3, TimeSpan.FromMinutes(1));
-        var timeoutPolicy = _pollyPolicies.GetTimeoutPolicy(TimeSpan.FromSeconds(5));
+        var timeoutPolicy = _pollyPolicies.GetTimeoutPolicy(TimeSpan.FromSeconds(100));
 
         AsyncPolicyWrap<HttpResponseMessage> policy = Policy.WrapAsync(retryPolicy, circuitBreakerPolicy, timeoutPolicy);
 
