@@ -3,6 +3,7 @@ using eCommerce.BusinessLogicLayer.DTO;
 using eCommerce.BusinessLogicLayer.ServiceContracts;
 using eCommerce.DataAccessLayer.Entities;
 using eCommerce.DataAccessLayer.RepositoryContracts;
+using eCommerce.ProductsService.BusinessLogicLayer.RabbitMQ;
 using FluentValidation;
 using FluentValidation.Results;
 using System.Linq.Expressions;
@@ -15,14 +16,15 @@ public class ProductsService : IProductsService
   private readonly IValidator<ProductUpdateRequest> _productUpdateRequestValidator;
   private readonly IMapper _mapper;
   private readonly IProductsRepository _productsRepository;
+    private readonly IRabbitMQPublisher _rabbitMQPublisher;
 
-
-  public ProductsService(IValidator<ProductAddRequest> productAddRequestValidator, IValidator<ProductUpdateRequest> productUpdateRequestValidator, IMapper mapper, IProductsRepository productsRepository)
+    public ProductsService(IValidator<ProductAddRequest> productAddRequestValidator, IValidator<ProductUpdateRequest> productUpdateRequestValidator, IMapper mapper, IProductsRepository productsRepository, IRabbitMQPublisher rabbitMQPublisher)
   {
     _productAddRequestValidator = productAddRequestValidator;
     _productUpdateRequestValidator = productUpdateRequestValidator;
     _mapper = mapper;
     _productsRepository = productsRepository;
+        _rabbitMQPublisher = rabbitMQPublisher;
   }
 
 
@@ -30,7 +32,7 @@ public class ProductsService : IProductsService
   {
     if (productAddRequest == null)
     {
-      throw new ArgumentNullException(nameof(productAddRequest));
+        throw new ArgumentNullException(nameof(productAddRequest));
     }
 
     //Validate the product using Fluent Validation
@@ -39,8 +41,8 @@ public class ProductsService : IProductsService
     // Check the validation result
     if (!validationResult.IsValid)
     {
-      string errors = string.Join(", ", validationResult.Errors.Select(temp => temp.ErrorMessage)); //Error1, Error2, ...
-      throw new ArgumentException(errors);
+        string errors = string.Join(", ", validationResult.Errors.Select(temp => temp.ErrorMessage)); //Error1, Error2, ...
+        throw new ArgumentException(errors);
     }
 
 
@@ -50,7 +52,7 @@ public class ProductsService : IProductsService
 
     if (addedProduct == null)
     {
-      return null;
+        return null;
     }
 
     ProductResponse addedProductResponse = _mapper.Map<ProductResponse>(addedProduct); //Map addedProduct into 'ProductRepsonse' type (it invokes ProductToProductResponseMappingProfile)
@@ -70,7 +72,25 @@ public class ProductsService : IProductsService
 
     //Attempt to delete product
     bool isDeleted = await _productsRepository.DeleteProduct(productID);
-    return isDeleted;
+
+    //
+
+    if (isDeleted)
+    {
+        ProductDeletionMessage message = new ProductDeletionMessage(existingProduct.ProductID, existingProduct.ProductName);
+
+        //string routingKey = "product.delete";
+
+        var header = new Dictionary<string, object>()
+        {
+            {"event", "product.delete" },
+            {"RowCount", 1 }
+        };
+
+            _rabbitMQPublisher.Publish<ProductDeletionMessage>(header, message);
+     }
+
+     return isDeleted;
   }
 
 
@@ -130,9 +150,29 @@ public class ProductsService : IProductsService
     //Map from ProductUpdateRequest to Product type
     Product product = _mapper.Map<Product>(productUpdateRequest); //Invokes ProductUpdateRequestToProductMappingProfile
 
+    //Check if product name is changed
+    //bool isProductNameChanged = productUpdateRequest.ProductName != existingProduct.ProductName;
+
     Product? updatedProduct = await _productsRepository.UpdateProduct(product);
 
-    ProductResponse? updatedProductResponse = _mapper.Map<ProductResponse>(updatedProduct);
+
+        //if (isProductNameChanged)
+        //{
+        //    string routingKey = "product.update.name";
+        //    var message = new ProductNameUpdateMessage(product.ProductID, product.ProductName);
+
+        //    _rabbitMQPublisher.Publish<ProductNameUpdateMessage>(routingKey, message);
+        //}
+        
+        var header = new Dictionary<string, object>()
+        {
+            {"event", "product.update" },
+            {"RowCount", 1 }
+        };
+
+        _rabbitMQPublisher.Publish<Product>(header, updatedProduct);
+
+        ProductResponse? updatedProductResponse = _mapper.Map<ProductResponse>(updatedProduct);
 
     return updatedProductResponse;
   }

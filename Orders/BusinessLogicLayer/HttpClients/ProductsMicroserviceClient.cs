@@ -82,8 +82,8 @@ public class ProductsMicroserviceClient
             string productJson = JsonSerializer.Serialize(product);
 
             DistributedCacheEntryOptions options = new DistributedCacheEntryOptions()
-                .SetAbsoluteExpiration(TimeSpan.FromMinutes(60))
-                .SetSlidingExpiration(TimeSpan.FromMinutes(20));
+                .SetAbsoluteExpiration(TimeSpan.FromMinutes(3))
+                .SetSlidingExpiration(TimeSpan.FromMinutes(2));
 
             await _distributedCache.SetStringAsync(cacheKey, productJson, options);
 

@@ -5,7 +5,9 @@ using FluentValidation;
 using eCommerce.OrdersMicroservice.BusinessLogicLayer.Validators;
 using eCommerce.ordersMicroservice.BusinessLogicLayer.Mappers;
 using eCommerce.OrdersMicroservice.BusinessLogicLayer.ServiceContracts;
-using eCommerce.ordersMicroservice.BusinessLogicLayer.Services;
+using eCommerce.OrdersMicroservice.BusinessLogicLayer.Services;
+using eCommerce.OrdersMicroservice.BusinessLogicLayer.RabbitMQ;
+using eCommerce.OrdersService.BusinessLogicLayer.RabbitMQ;
 
 
 namespace eCommerce.OrdersMicroservice.BusinessLogicLayer;
@@ -19,7 +21,7 @@ public static class DependencyInjection
 
         services.AddAutoMapper(typeof(OrderAddRequestToOrderMappingProfile).Assembly);
 
-        services.AddScoped<IOrdersService, OrdersService>();
+        services.AddScoped<IOrdersService, eCommerce.OrdersMicroservice.BusinessLogicLayer.Services.OrdersService>();
 
         string connectionStringTemplate = configuration.GetConnectionString("RedisConnectionString")!;
         string connectionString = connectionStringTemplate.Replace("$REDIS_HOST", Environment.GetEnvironmentVariable("REDIS_HOST"))
@@ -29,6 +31,14 @@ public static class DependencyInjection
         {
             options.Configuration = connectionString;
         });
+
+        services.AddTransient<IRabbitMQProductNameUpdateConsumer, RabbitMQProductNameUpdateConsumer>();
+
+        services.AddHostedService<RabbitMQProductNameUpdateHostedService>();
+
+        services.AddTransient<IRabbitMQProductDeletionConsumer, RabbitMQProductDeletionConsumer>();
+
+        services.AddHostedService<RabbitMQProductDeletionHostedService>();
 
         return services;
     }
