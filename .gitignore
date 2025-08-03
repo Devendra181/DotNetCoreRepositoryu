@@ -363,3 +363,4 @@ MigrationBackup/
 FodyWeavers.xsd
 /Orders/BusinessLogicLayer/Policies/UsersMicroservicePolicies.cs
 /.gitignore
+/logs.zip
