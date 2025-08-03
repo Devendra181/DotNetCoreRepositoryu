@@ -74,6 +74,9 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Identity", "Identity", "{6403A928-7745-425F-A2E8-52731AD90E99}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "eCommerce", "eCommerce", "{2F6BB3A8-4462-4DC2-B2D2-0CA05419EF5E}"
+	ProjectSection(SolutionItems) = preProject
+		docker-compose.build.yaml = docker-compose.build.yaml
+	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Users", "Users", "{0EE06AAC-59BA-44B9-BAFB-1D9192A4E5D7}"
 EndProject
@@ -102,6 +105,67 @@ EndProject
 Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{81DDED9D-158B-E303-5F62-77A2896D2A5A}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ApiGateway", "Orders\ApiGateway\ApiGateway.csproj", "{A6B890AD-D74D-46C9-AE11-B1D2A351F028}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SecurityInASPDotNETCoreWebAPI", "SecurityInASPDotNETCoreWebAPI", "{53B8C779-BDA3-44F8-BCC1-DE42D148DF3B}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "CORS", "CORS", "{7B8F97B2-3CE1-4538-85A4-56577168627A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UserServiceAPI", "WebAPI\Security\Cores\UserServiceAPI\UserServiceAPI.csproj", "{3917994C-32DB-4E38-8A03-83D4607512FB}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "mongodb", "mongodb", "{32501D54-B891-4C95-A453-8CC72BB1C055}"
+	ProjectSection(SolutionItems) = preProject
+		eCommerce\mongodb\Dockerfile = eCommerce\mongodb\Dockerfile
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "mongodb-init", "mongodb-init", "{37FA1B61-3E63-4297-8E00-87A75D10FFD8}"
+	ProjectSection(SolutionItems) = preProject
+		D:\.Net&C#\.Net\Microservices\Dot-NET-Microservices-with-Azure-and-AKS-main\12. AKS\05. Pushing Microservice Images to ACR\mongodb\mongodb-init\init.js = D:\.Net&C#\.Net\Microservices\Dot-NET-Microservices-with-Azure-and-AKS-main\12. AKS\05. Pushing Microservice Images to ACR\mongodb\mongodb-init\init.js
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "mysql", "mysql", "{7F912975-1CDF-4112-B7F5-6ED20D4B6692}"
+	ProjectSection(SolutionItems) = preProject
+		eCommerce\mysql\mysql-init\db.sql = eCommerce\mysql\mysql-init\db.sql
+		eCommerce\mysql\Dockerfile = eCommerce\mysql\Dockerfile
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "postgres", "postgres", "{B9F46827-C0F7-40F1-B537-A655E2F9D4DC}"
+	ProjectSection(SolutionItems) = preProject
+		eCommerce\postgres\Dockerfile = eCommerce\postgres\Dockerfile
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "mysql-init", "mysql-init", "{BD701F60-E1E5-4823-801D-F51DA737213C}"
+	ProjectSection(SolutionItems) = preProject
+		eCommerce\mysql\mysql-init\db.sql = eCommerce\mysql\mysql-init\db.sql
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "postgres-init", "postgres-init", "{6EE5843E-452E-4788-BD15-2E2FD8C0E19E}"
+	ProjectSection(SolutionItems) = preProject
+		eCommerce\postgres\postgres-init\sql1.sql = eCommerce\postgres\postgres-init\sql1.sql
+		eCommerce\postgres\postgres-init\sql2.sql = eCommerce\postgres\postgres-init\sql2.sql
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "aks", "aks", "{D604CFE5-AE93-4DBA-BBE8-91731B72D64F}"
+	ProjectSection(SolutionItems) = preProject
+		eCommerce\aks\apigateway-deployment.yaml = eCommerce\aks\apigateway-deployment.yaml
+		eCommerce\aks\apigateway.service.yaml = eCommerce\aks\apigateway.service.yaml
+		eCommerce\aks\mongodb-deployment.yaml = eCommerce\aks\mongodb-deployment.yaml
+		eCommerce\aks\mongodb.service.yaml = eCommerce\aks\mongodb.service.yaml
+		eCommerce\aks\mysql-deployment.yaml = eCommerce\aks\mysql-deployment.yaml
+		eCommerce\aks\mysql.service.yaml = eCommerce\aks\mysql.service.yaml
+		eCommerce\aks\orders-microservice-deployment.yaml = eCommerce\aks\orders-microservice-deployment.yaml
+		eCommerce\aks\orders-microservice.service.yaml = eCommerce\aks\orders-microservice.service.yaml
+		eCommerce\aks\postgres-deployment.yaml = eCommerce\aks\postgres-deployment.yaml
+		eCommerce\aks\postgres.service.yaml = eCommerce\aks\postgres.service.yaml
+		eCommerce\aks\products-microservice-deployment.yaml = eCommerce\aks\products-microservice-deployment.yaml
+		eCommerce\aks\products-microservice.service.yaml = eCommerce\aks\products-microservice.service.yaml
+		eCommerce\aks\rabbitmq-deployment.yaml = eCommerce\aks\rabbitmq-deployment.yaml
+		eCommerce\aks\rabbitmq.secret.yaml = eCommerce\aks\rabbitmq.secret.yaml
+		eCommerce\aks\rabbitmq.service.yaml = eCommerce\aks\rabbitmq.service.yaml
+		eCommerce\aks\redis-deployment.yaml = eCommerce\aks\redis-deployment.yaml
+		eCommerce\aks\redis.service.yaml = eCommerce\aks\redis.service.yaml
+		eCommerce\aks\users-microservice-deployment.yaml = eCommerce\aks\users-microservice-deployment.yaml
+		eCommerce\aks\users-microservice.service.yaml = eCommerce\aks\users-microservice.service.yaml
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -253,6 +317,10 @@ Global
 		{A6B890AD-D74D-46C9-AE11-B1D2A351F028}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A6B890AD-D74D-46C9-AE11-B1D2A351F028}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A6B890AD-D74D-46C9-AE11-B1D2A351F028}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3917994C-32DB-4E38-8A03-83D4607512FB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3917994C-32DB-4E38-8A03-83D4607512FB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3917994C-32DB-4E38-8A03-83D4607512FB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3917994C-32DB-4E38-8A03-83D4607512FB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -304,6 +372,16 @@ Global
 		{CCD97743-CDAA-4821-8C1C-D112417959B3} = {9A75EB89-C3F2-443C-8EA1-04119B3C46CB}
 		{81DDED9D-158B-E303-5F62-77A2896D2A5A} = {2F6BB3A8-4462-4DC2-B2D2-0CA05419EF5E}
 		{A6B890AD-D74D-46C9-AE11-B1D2A351F028} = {9A75EB89-C3F2-443C-8EA1-04119B3C46CB}
+		{53B8C779-BDA3-44F8-BCC1-DE42D148DF3B} = {24DD00F0-0E40-4D9B-B773-3E11342EDC9A}
+		{7B8F97B2-3CE1-4538-85A4-56577168627A} = {53B8C779-BDA3-44F8-BCC1-DE42D148DF3B}
+		{3917994C-32DB-4E38-8A03-83D4607512FB} = {7B8F97B2-3CE1-4538-85A4-56577168627A}
+		{32501D54-B891-4C95-A453-8CC72BB1C055} = {2F6BB3A8-4462-4DC2-B2D2-0CA05419EF5E}
+		{37FA1B61-3E63-4297-8E00-87A75D10FFD8} = {32501D54-B891-4C95-A453-8CC72BB1C055}
+		{7F912975-1CDF-4112-B7F5-6ED20D4B6692} = {2F6BB3A8-4462-4DC2-B2D2-0CA05419EF5E}
+		{B9F46827-C0F7-40F1-B537-A655E2F9D4DC} = {2F6BB3A8-4462-4DC2-B2D2-0CA05419EF5E}
+		{BD701F60-E1E5-4823-801D-F51DA737213C} = {7F912975-1CDF-4112-B7F5-6ED20D4B6692}
+		{6EE5843E-452E-4788-BD15-2E2FD8C0E19E} = {B9F46827-C0F7-40F1-B537-A655E2F9D4DC}
+		{D604CFE5-AE93-4DBA-BBE8-91731B72D64F} = {2F6BB3A8-4462-4DC2-B2D2-0CA05419EF5E}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {1DC55F9E-2862-47D4-99EB-3D9A75C58EC7}
