@@ -12,7 +12,7 @@ using ProductService.Infrastructure.Persistence;
 namespace ProductService.Infrastructure.Migrations
 {
     [DbContext(typeof(ProductDbContext))]
-    [Migration("20250727144717_mig1")]
+    [Migration("20250805135722_mig1")]
     partial class mig1
     {
         /// <inheritdoc />

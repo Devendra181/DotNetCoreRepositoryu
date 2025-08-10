@@ -77,7 +77,7 @@ namespace UserService.API
             });
 
             builder.Services.AddScoped<IUserRepository, UserRepository>();
-            builder.Services.AddScoped<IUserService, UserService.Application.Services.UserService>();
+            builder.Services.AddScoped<IUserService, Application.Services.UserService>();
 
             var app = builder.Build();
 
